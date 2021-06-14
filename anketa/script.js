@@ -29,7 +29,7 @@ function sexSelection(sexInput) {
 
 function isLetter(str) {
   if (str == null) return false;
-  return str.length >= 1 && str.match(/[a-z]/ig);
+  return str.length >= 1 && str.match(/[a-zа-я]/ig);
 }
 
 function isNumber(str) {
