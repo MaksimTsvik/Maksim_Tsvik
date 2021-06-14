@@ -1,26 +1,26 @@
 /*Each prompt inspection for correct input*/
-var surname = prompt("Input your surname", "Your surname");
+let surname = prompt("Input your surname", "Your surname");
 while (!isLetter(surname) || (surname === "Your surname")) {
-  surname = prompt("Input your surname", "Your surname");
+  surname = prompt("Correct surname must consist of letters", "Your surname");
 }
 
-var nameBirth = prompt("Input your name", "Your name");
+let nameBirth = prompt("Input your name", "Your name");
 while (!isLetter(nameBirth) || (nameBirth === "Your name")) {
-  nameBirth = prompt("Input your name", "Your name");
+  nameBirth = prompt("Correct name must consist of letters", "Your name");
 }
 
-var nameF = prompt("Input your Father's name", "Your Father's name");
+let nameF = prompt("Input your Father's name", "Your Father's name");
 while (!isLetter(nameF) || (nameF === "Your Father's name")) {
-  nameF = prompt("Input your Father's name", "Your Father's name");
+  nameF = prompt("Correct Father's name must consist of letters", "Your Father's name");
 }
 
-var age = prompt("Input your age in yrs", "Your age");
+let age = prompt("Input your age in yrs", "Your age");
 while (!isNumber(age)) {
-  age = prompt("Input your age in yrs", "Your age");
+  age = prompt("Correct age must consist of numbers", "Your age");
 }
 
-var sexMale = confirm("You Male?");
-var retired = age < 65 ? false : true;
+let sexMale = confirm("You Male?");
+let retired = age < 65 ? false : true;
 
 function sexSelection(sexInput) {
   if (sexInput) return "male";
