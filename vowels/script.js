@@ -1,7 +1,11 @@
 const string = prompt("Input a string", "Type here");
+const vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U', 'а', 'А', 'е', 'Е', 'ё', 'Ё', 'и', 'И', 'о', 'О', 'у', 'У', 'ы', 'Ы', 'э', 'Э', 'ю', 'Ю', 'я', 'Я',];
 
-// function strReverse(str) {
-//   return str.split("").reverse().join("");
-// }
+function vowelsCalc(str) {
+  const strArr = str.split('');
+  let counter = 0;
+  strArr.forEach(element => vowels.includes(element) ? counter++ : null);
+  return counter;
+}
 
-// alert(`Reversed string: ${strReverse(string)}`);
+alert(`Vowels in string: ${vowelsCalc(string)}`);
