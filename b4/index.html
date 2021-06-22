@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B4+</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header__h1">B4+ TASK</h1>
+  </header>
+  <main class="main">
+    <pre class="task-text">
+Напишите функцию для оборачивания текста в тег, с которой можно было бы работать в следующем стиле:
+var wrapH1=buildWrapper(""H1""); // строим функцию для оборачивания текста в тег H1
+var wrapP=buildWrapper(""P"");   // строим функцию для оборачивания текста в тег P
+console.log( wrapH1(""СТИХИ"") );
+// в консоль выводится строка ""<H1>СТИХИ</H1>""
+console.log( wrapP(""Однажды в студёную зимнюю пору"") );
+// в консоль выводится строка ""<P>Однажды в студёную зимнюю пору</P>""
+Функция должна учитывать, что некоторые символы надо заменять на HTML-мнемоники (а именно - символы < > ' "" &):
+console.log( wrapP(""Вкусные M&M's"") );
+// в консоль выводится строка ""<P>Вкусные M&amp;M&apos;s</P>"""
+    </pre>
+    <script src="script.js"></script>
+  </main>
+</body>
+
+</html>
