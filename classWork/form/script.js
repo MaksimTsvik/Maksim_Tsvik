@@ -1,24 +1,22 @@
-const app = document.querySelector('.app');
-let newItemHtml = "";
+const app = document.querySelector(".app");
 let phones = [];
 
-let imgUrl = document.getElementById('iUrl');
-let brand = document.getElementById('bName');
-let model = document.getElementById('pModel');
-let price = document.getElementById('pPrice');
-let sale = document.getElementById('onSale');
-
-function pushItem(imgUrl, brand, model, price, sale) {
-  phones.push({ imgUrl: imgUrl.value, brand: brand.value, model: model.value, price: price.value, sale: sale.checked })
+function pushItem() {
+  const imgUrl = document.getElementById("iUrl");
+  const brand = document.getElementById("bName");
+  const model = document.getElementById("pModel");
+  const price = document.getElementById("pPrice");
+  const sale = document.getElementById("onSale");
+  phones.push({ "imgUrl": imgUrl.value, "brand": brand.value, "model": model.value, "price": price.value, "sale": sale.checked })
   console.log(phones);
 }
 
-function clearing() {
-  newItemHtml = "";
+function clearScr() {
+  app.innerHTML = "";
 }
 
-function rendering() {
-  clearing();
+function render() {
+  let newItemHtml = "";
   for (phone of phones) {
     newItemHtml += `<div class="card" style="width: 18rem;">
     <img src="${phone.imgUrl}" class="card-img-top" alt="${phone.brand}">
@@ -32,3 +30,7 @@ function rendering() {
   }
   app.innerHTML = newItemHtml;
 }
+
+document.getElementById("addBtn").addEventListener("click", pushItem);
+document.getElementById("clearScrBtn").addEventListener("click", clearScr);
+document.getElementById("renderBtn").addEventListener("click", render);
