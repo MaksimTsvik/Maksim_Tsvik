@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B4+</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header__h1">B5+ TASK</h1>
+  </header>
+  <main class="main">
+    <pre class="task-text">
+B5+
+Напишите функцию для оборачивания текста в тег с атрибутами, с которой можно было бы работать в следующем стиле:
+var wrapP=buildWrapper(""P"");   // строим функцию для оборачивания текста в тег P
+console.log( wrapP(""Однажды в студёную зимнюю пору"") );
+// в консоль выводится строка ""<P>Однажды в студёную зимнюю пору</P>""
+console.log( wrapP(""Однажды в студёную зимнюю пору"",{lang:""ru""}) );
+// в консоль выводится строка ""<P lang='ru'>Однажды в студёную зимнюю пору</P>""
+Функция должна учитывать, что некоторые символы надо заменять на HTML-мнемоники (а именно - символы < > ' "" &):
+console.log( wrapP(""Однажды в <студёную> зимнюю пору"") );
+// в консоль выводится строка ""<P>Однажды в &lt;студёную&gt; зимнюю пору</P>""
+var wrapH1=buildWrapper(""H1""); // строим функцию для оборачивания текста в тег H1
+console.log( wrapH1(""СТИХИ"",{align:""center"",title:""M&M's""}) );
+// в консоль выводится строка ""<H1 align='center' title='M&amp;M&apos;s'>СТИХИ</H1>"
+    </pre>
+    <script src="script.js"></script>
+  </main>
+</body>
+
+</html>
