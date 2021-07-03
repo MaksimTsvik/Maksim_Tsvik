@@ -11,45 +11,37 @@
 
 <body>
   <h1 class="h1Header">FORM CLASS TASK</h1>
-  <div class="app"></div>
-
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="add img link" aria-label="Recipient's username"
-      aria-describedby="basic-addon2">
-    <span class="input-group-text" id="basic-addon2">IMG link</span>
+    <input type="text" class="form-control" placeholder="add img url" id="iUrl">
+    <span class="input-group-text" id="basic-addon2">IMG URL</span>
   </div>
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="add brand name" aria-label="Recipient's username"
-      aria-describedby="basic-addon2">
+    <input type="text" class="form-control" placeholder="add brand name" id="bName">
     <span class="input-group-text" id="basic-addon2">Brand</span>
   </div>
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="add model" aria-label="Recipient's username"
-      aria-describedby="basic-addon2">
+    <input type="text" class="form-control" placeholder="add model" id="pModel">
     <span class="input-group-text" id="basic-addon2">Model</span>
   </div>
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="add price" aria-label="Recipient's username"
-      aria-describedby="basic-addon2">
+    <input type="text" class="form-control" placeholder="add price" id="pPrice">
     <span class="input-group-text" id="basic-addon2">Price</span>
   </div>
   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-    <label class="btn btn-outline-primary" for="btnradio1">Not ON SALE</label>
-
-    <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-    <label class="btn btn-outline-primary" for="btnradio3">ON SALE</label>
+    <input type="radio" class="btn-check" name="btnradio" id="noSale" autocomplete="off" checked>
+    <label class="btn btn-outline-primary" for="noSale">Not ON SALE</label>
+    <input type="radio" class="btn-check" name="btnradio" id="onSale" autocomplete="off">
+    <label class="btn btn-outline-primary" for="onSale">ON SALE</label>
   </div>
-
+  <hr>
+  <div class="final-buttons">
+    <button type="button" class="btn btn-secondary btn-lg"
+      onclick="pushItem(imgUrl, brand, model, price, sale)">ADD</button>
+    <button type="button" class="btn btn-secondary btn-lg" onclick="rendering()">RENDER</button>
+  </div>
   <hr>
 
-  <div class="final-buttons">
-    <button type="button" class="btn btn-secondary btn-lg">ADD</button>
-    <button type="button" class="btn btn-secondary btn-lg">RENDER</button>
-  </div>
-
-
-
+  <div class="app row row-cols-1 row-cols-md-3 g-4"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
