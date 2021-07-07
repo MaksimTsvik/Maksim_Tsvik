@@ -1,0 +1,69 @@
+"use strict";
+
+function HashStorageFunc() {
+  const self = this;
+
+  self.addValue = function (key, value) {
+    self[key] = value;
+  }
+
+  self.getValue = function (key) {
+    return self[key];
+  }
+
+  self.deleteValue = function (key) {
+    if (key in self) {
+      return (delete self.key);
+    }
+    return false;
+  }
+
+  self.getKeys = function () {
+    let keysArr = [];
+    for (let key in self) {
+      keysArr.push(key);
+    }
+    return keysArr;
+  }
+}
+
+//Create an object
+const drinkStorage = new HashStorageFunc();
+
+//Find each button
+const addBtn = document.getElementById("addBtn");
+const getBtn = document.getElementById("getBtn");
+const deleteBtn = document.getElementById("deleteBtn");
+const listBtn = document.getElementById("listBtn");
+
+//Find html markup position
+const app = document.querySelector(".app");
+
+//Create listeners on each button
+addBtn.addEventListener("click", addDrink);
+getBtn.addEventListener("click", getDrink);
+deleteBtn.addEventListener("click", deleteDrink);
+listBtn.addEventListener("click", listDrink);
+
+function addDrink() {
+  const name = prompt('Input drink NAME', "Type HERE");
+  const alcohol = confirm("Is it with alcohol?") ? "YES" : "NO";
+  const reciepe = prompt("Input a receipe", "Type HERE");
+  //Adding new drink
+  drinkStorage.addValue(name, { "Is it with alcohol": alcohol, "How to mix it": reciepe });
+}
+
+function getDrink() {
+  const name = prompt('Input drink NAME', "Type HERE");
+
+  if (!(name in drinkStorage)) {
+    return alert("NO SUCH DRINK!");
+  }
+  alert(drinkStorage.getValue(name));
+}
+
+function deleteDrink() {
+}
+
+function listDrink() {
+}
