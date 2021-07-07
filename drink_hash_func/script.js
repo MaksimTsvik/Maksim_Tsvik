@@ -51,6 +51,7 @@ function addDrink() {
   const reciepe = prompt("Input a receipe", "Type HERE");
   //Adding new drink
   drinkStorage.addValue(name, { "Is it with alcohol": alcohol, "How to mix it": reciepe });
+  console.log(drinkStorage)
 }
 
 function getDrink() {
@@ -59,7 +60,11 @@ function getDrink() {
   if (!(name in drinkStorage)) {
     return alert("NO SUCH DRINK!");
   }
-  alert(drinkStorage.getValue(name));
+
+  let drinkProp = drinkStorage.getValue(name);
+  alert(`Drink ${name}:
+Is it with alcohol: ${drinkProp["Is it with alcohol"]}
+How to mix it: ${drinkProp["How to mix it"]}`)
 }
 
 function deleteDrink() {
