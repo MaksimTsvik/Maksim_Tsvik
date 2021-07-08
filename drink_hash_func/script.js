@@ -13,7 +13,7 @@ function HashStorageFunc() {
 
   self.deleteValue = function (key) {
     if (key in self) {
-      return (delete self.key);
+      return (delete self[key]);
     }
     return false;
   }
@@ -23,7 +23,7 @@ function HashStorageFunc() {
     for (let key in self) {
       keysArr.push(key);
     }
-    return keysArr;
+    return keysArr.slice(0, -4);
   }
 }
 
@@ -60,7 +60,7 @@ function getDrink() {
   if (!(name in drinkStorage)) {
     return alert("NO SUCH DRINK!");
   }
-
+  //Get correct drink object
   let drinkProp = drinkStorage.getValue(name);
   alert(`Drink ${name}:
 Is it with alcohol: ${drinkProp["Is it with alcohol"]}
@@ -68,7 +68,12 @@ How to mix it: ${drinkProp["How to mix it"]}`)
 }
 
 function deleteDrink() {
+  const name = prompt('Input drink NAME', "Type HERE");
+  if (drinkStorage.deleteValue(name)) alert("DELETED");
+  else alert("NO SUCH DRINK!");
+  console.log(drinkStorage);
 }
 
 function listDrink() {
+  alert(`${drinkStorage.getKeys()}`);
 }
