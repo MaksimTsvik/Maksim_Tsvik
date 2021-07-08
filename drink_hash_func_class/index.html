@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <title>DRINKS_HASH_FUNC_CLASS</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header__h1" style="text-align: center;">DRINKS_HASH_FUNC_CLASS</h1>
+  </header>
+  <main class="main">
+    <!-- <pre class="task-text">
+      Создать проект DRINKS_HASH_FUNC.
+      1.
+      Разработать класс HashStorageFunc в функциональном стиле (т.е. функцию-конструктор) для хранения в хэше произвольных пар ключ-значение.
+      Ключ может быть любой строкой; значение может иметь любой тип, в том числе векторный (хэш, массив и т.д.)
+      Класс должен иметь следующий интерфейс (т.е. иметь следующие публичные методы):
+      addValue(key,value) — сохраняет указанное значение под указанным ключом;
+      getValue(key) — возвращает значение по указанному ключу либо undefined;
+      deleteValue(key) — удаляет значение с указанным ключом, возвращает true если значение было удалено и false если такого значения не было в хранилище;
+      getKeys() — возвращает массив, состоящий из одних ключей.
+      Класс должен быть чистым (не должен использовать никаких глобальных переменных, не, должен «пачкать экран»).
+      Класс должен быть универсальным, т.е. не зависеть ни от структуры хранимых данных, ни от способа их последующего использования
+      (в т.ч. не должен содержать никаких ссылок на DOM, т.к. может использоваться и вообще без веб-страницы).
+      2.
+      Создать объект drinkStorage класса HashStorageFunc для хранения рецептов напитков.
+      Ключом является название напитка; значением — информация о напитке (алкогольный напиток или нет, строка с рецептом приготовления и т.д. по желанию).
+      3.
+      Разработать веб-страницу для работы с хранилищем рецептов напитков.
+      На странице должны быть кнопки:
+      «ввод информации о напитке» — последовательно спрашивает название напитка, алкогольный он или нет, рецепт его приготовления; сохраняет информацию о напитке в хранилище.
+      «получение информации о напитке» — спрашивает название напитка и выдаёт (на страницу, в консоль или в alert) либо информацию о нём (по примеру, приведённому ниже),
+      либо сообщение об отсутствии такого напитка в хранилище.
+      «удаление информации о напитке» — спрашивает название напитка и удаляет его из хранилища (если он там есть) с выдачей соответствующего сообщения в информационное окно.
+      «перечень всех напитков» — выдаёт в информационное окно перечень всех напитков из хранилища (только названия).
+      
+      Пример информации о напитке:
+      
+      напиток Маргарита
+      алкогольный: да
+      рецепт приготовления:
+      продукт, продукт... смешать...
+    </pre> -->
+
+    <div style="display: flex; justify-content: space-evenly">
+      <button type="button" class="btn btn-secondary btn-lg" id="addBtn">Ввод информации о напитке</button>
+      <button type="button" class="btn btn-secondary btn-lg" id="getBtn">Получение информации о напитке</button>
+      <button type="button" class="btn btn-secondary btn-lg" id="deleteBtn">Удаление информации о напитке</button>
+      <button type="button" class="btn btn-secondary btn-lg" id="listBtn">Перечень всех напитков</button>
+    </div>
+    <div class="app" style="display:block; text-align: center;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </main>
+</body>
+
+</html>
