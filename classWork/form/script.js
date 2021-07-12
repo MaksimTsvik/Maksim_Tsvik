@@ -43,10 +43,7 @@ document.getElementById("renderBtn").addEventListener("click", render);
 window.addEventListener("click", function (e) {
   let index = e.target.dataset.id;
   if (index !== undefined) {
-    // phones = phones.filter(item => item.id != index);
-    console.log(index)
-    phones.splice(index, 1);
-    console.log(phones)
+    phones = phones.filter(item => item.id != index);
     render();
   }
 });
