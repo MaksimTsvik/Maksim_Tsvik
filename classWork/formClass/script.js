@@ -54,4 +54,3 @@ window.addEventListener("click", function (e) {
     mobilePhone.render();
   }
 });
-
