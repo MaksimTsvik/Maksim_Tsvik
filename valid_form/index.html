@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <title>VALID_FORM</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header__h1" style="text-align: center;">VALID_FORM</h1>
+  </header>
+  <main class="main">
+    <pre class="task-text" style="text-align: center;">
+Сверстать проект VALID_FORM по образцу.
+Сделать валидацию вводимых значений; правила валидации продумать самостоятельно, описать их в комментариях;
+как минимум, пустое (начальное) значение каждого из полей должно считаться ошибочным.
+При уходе с текстового поля формы или изменении чекбокса, радиогруппы, выпадающего списка — валидировать только
+данное поле и в случае ошибки сообщение об ошибке сразу отобразить рядом с полем (сообщения об ошибках возле
+остальных полей не должны стираться); позволять пользователю уйти с поля, даже если оно заполнено с ошибкой.
+При попытке отправки формы — валидировать сразу все поля и отобразить сразу все сообщения об ошибках рядом с
+ошибочно заполненными полями; скроллировать страницу к первому ошибочно заполненному полю, фокусировать это поле.
+В качестве скрипта, обрабатывающего данные формы (атрибут action тега form), можно установить https://fe.it-academy.by/TestForm.php
+    </pre>
+    <hr>
+    <div style="display: flex; justify-content: space-evenly">
+      <!-- <input type=button class="btn btn-secondary btn-lg" value='ПОСТРОИТЬ!' id="build"> -->
+
+
+      <form method="POST" action="https://fe.it-academy.by/TestForm.php" target="_blank">
+        <table class="SNoBorders">
+          <tbody>
+            <tr>
+              <td>Разработчики:</td>
+              <td><input type="text" name="author" style="width: 453px"></td>
+            </tr>
+            <tr>
+              <td>Название сайта:</td>
+              <td><input type="text" name="title" style="width: 453px"></td>
+            </tr>
+            <tr>
+              <td>URL сайта:</td>
+              <td><input type="text" name="title" style="width: 300px"></td>
+            </tr>
+            <tr>
+              <td>Дата запуска сайта:</td>
+              <td><input type="text" name="startdate" style="width: 80px"></td>
+            </tr>
+            <tr>
+              <td>Посетителей в сутки:</td>
+              <td><input type="text" name="persons" style="width: 80px"></td>
+            </tr>
+            <tr>
+              <td>E-mail для связи:</td>
+              <td><input type="email" name="title" style="width: 200px"></td>
+            </tr>
+            <tr>
+              <td>Рубрика каталога:</td>
+              <td style="padding-left: 1px">
+                <select name="rubric" style="width: 204px; margin-left: 2px">
+                  <option value="1">здоровье</option>
+                  <option value="2">домашний уют</option>
+                  <option value="3" selected="">бытовая техника</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Размещение:</td>
+              <td style="padding: 2px 0 2px 0">
+                <input type="radio" name="public" value="1"><span class="SRadio8a">бесплатное</span>
+                <input type="radio" name="public" value="2"><span class="SRadio8a">платное</span>
+                <input type="radio" name="public" value="3"><span class="SRadio8a">VIP</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 2px 0 3px 3px">Разрешить&nbsp;отзывы:</td>
+              <td><input type="checkbox" name="comments"></td>
+            </tr>
+            <tr>
+              <td colspan="2">Описание сайта:<br>
+                <textarea name="article" style="width: 608px; height: 50px"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="submit" value="Опубликовать"></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

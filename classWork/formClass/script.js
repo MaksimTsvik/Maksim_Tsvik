@@ -23,7 +23,7 @@ class MobilePhone {
   render() {
     let newItemHtml = "";
     for (let phone of phones) {
-      newItemHtml += `<div class="card" style="width: 18rem;">
+      newItemHtml += `<div class="card" style="width: 18rem;" data-idCont="${phone.id}">
       <img src="${phone.imgUrl}" class="card-img-top" alt="${phone.brand}">
       <div class="card-body">
         <h5 class="card-title">${phone.model}</h5>
@@ -49,8 +49,59 @@ document.getElementById("renderBtn").addEventListener("click", mobilePhone.rende
 
 window.addEventListener("click", function (e) {
   let index = e.target.dataset.id;
-  if (index !== undefined) {
+  if (index) {
     phones = phones.filter(item => item.id != index);
     mobilePhone.render();
   }
 });
+
+document.querySelector('.app').addEventListener('mousedown', dragging);// select container with cards
+
+function dragging() {
+  var balls = document.querySelectorAll('.card');
+  console.log(balls)
+  balls.forEach(ball => {
+    ball.onmousedown = function (e) {
+
+      let coords = getCoords(ball);
+      let shiftX = e.pageX - coords.left;
+      let shiftY = e.pageY - coords.top;
+
+      ball.style.position = 'absolute';
+      document.body.appendChild(ball);
+      moveAt(e);
+
+      ball.style.zIndex = 1000; // над другими элементами
+
+      function moveAt(e) {
+        ball.style.left = e.pageX - shiftX + 'px';
+        ball.style.top = e.pageY - shiftY + 'px';
+      }
+
+      document.onmousemove = function (e) {
+        moveAt(e);
+      };
+
+      ball.onmouseup = function () {
+        document.onmousemove = null;
+        ball.onmouseup = null;
+        ball.style.position = 'relative';
+      };
+
+    }
+
+    ball.ondragstart = function () {
+      return false;
+    };
+
+    function getCoords(elem) {   // кроме IE8-
+      let box = elem.getBoundingClientRect();
+      return {
+        top: box.top + pageYOffset,
+        left: box.left + pageXOffset
+      };
+    }
+  })
+}
+
+

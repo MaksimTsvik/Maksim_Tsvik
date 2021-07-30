@@ -77,7 +77,7 @@ function builder(arr) {
         newInput.type = 'submit';
         break;
     }
-    newInput.name = item.name ? item.name : 'button';
+    newInput.name = item.name ? item.name : 'button'; //if element has no name - this is a button
     newInput.id = item.name ? item.name : 'button';
 
     newDiv.append(newInput);//add input into same div-wrapper as label
