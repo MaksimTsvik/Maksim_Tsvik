@@ -23,7 +23,7 @@ class MobilePhone {
   render() {
     let newItemHtml = "";
     for (let phone of phones) {
-      newItemHtml += `<div class="card" style="width: 18rem;" data-idCont="${phone.id}">
+      newItemHtml += `<div class="card" style="width: 18rem;" data-id="${phone.id}" draggable="true">
       <img src="${phone.imgUrl}" class="card-img-top" alt="${phone.brand}">
       <div class="card-body">
         <h5 class="card-title">${phone.model}</h5>
@@ -47,7 +47,7 @@ document.getElementById("addBtn").addEventListener("click", mobilePhone.pushItem
 document.getElementById("clearScrBtn").addEventListener("click", mobilePhone.clearScr);
 document.getElementById("renderBtn").addEventListener("click", mobilePhone.render);
 
-window.addEventListener("click", function (e) {
+window.addEventListener("click", function (e) {  //delete an item via DELETE button
   let index = e.target.dataset.id;
   if (index) {
     phones = phones.filter(item => item.id != index);
@@ -55,53 +55,30 @@ window.addEventListener("click", function (e) {
   }
 });
 
-document.querySelector('.app').addEventListener('mousedown', dragging);// select container with cards
+const basket = document.querySelector(".basket"); //find basket - place where to add drop listener
+const totalPrice = document.querySelector(".total_price"); //
+const itemsCount = document.querySelector('.basket_nmb')
+let itemId = null;
+let priceCount = 0;
+let itemsCounter = 0;
 
-function dragging() {
-  var balls = document.querySelectorAll('.card');
-  console.log(balls)
-  balls.forEach(ball => {
-    ball.onmousedown = function (e) {
+document.addEventListener("dragstart", function (ev) {
+  itemId = ev.target.dataset.id;
+});
 
-      let coords = getCoords(ball);
-      let shiftX = e.pageX - coords.left;
-      let shiftY = e.pageY - coords.top;
+document.addEventListener("dragover", function (ev) {
+  ev.preventDefault();
+});
 
-      ball.style.position = 'absolute';
-      document.body.appendChild(ball);
-      moveAt(e);
+basket.addEventListener("drop", function (ev) {
+  itemsCounter++;
+  itemsCount.innerHTML = itemsCounter;
 
-      ball.style.zIndex = 1000; // над другими элементами
-
-      function moveAt(e) {
-        ball.style.left = e.pageX - shiftX + 'px';
-        ball.style.top = e.pageY - shiftY + 'px';
-      }
-
-      document.onmousemove = function (e) {
-        moveAt(e);
-      };
-
-      ball.onmouseup = function () {
-        document.onmousemove = null;
-        ball.onmouseup = null;
-        ball.style.position = 'relative';
-      };
-
+  for (let phone of phones) {
+    if (phone.id == itemId) {
+      priceCount += +phone.price;
     }
+  }
 
-    ball.ondragstart = function () {
-      return false;
-    };
-
-    function getCoords(elem) {   // кроме IE8-
-      let box = elem.getBoundingClientRect();
-      return {
-        top: box.top + pageYOffset,
-        left: box.left + pageXOffset
-      };
-    }
-  })
-}
-
-
+  totalPrice.innerHTML = priceCount + " $";
+});
