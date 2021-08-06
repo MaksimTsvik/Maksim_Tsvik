@@ -27,44 +27,42 @@
 В качестве скрипта, обрабатывающего данные формы (атрибут action тега form), можно установить https://fe.it-academy.by/TestForm.php
     </pre>
     <hr>
-    <div style="display: flex; justify-content: space-evenly">
-      <!-- <input type=button class="btn btn-secondary btn-lg" value='ПОСТРОИТЬ!' id="build"> -->
-
-
-      <form method="POST" action="https://fe.it-academy.by/TestForm.php" target="_blank">
+    <div style="display: flex; justify-content: flex-start">
+      <form name="testForm" method="POST" action="https://fe.it-academy.by/TestForm.php" target="_blank">
         <table class="SNoBorders">
           <tbody>
             <tr>
               <td>Разработчики:</td>
-              <td><input type="text" name="author" style="width: 453px"></td>
+              <td><input type="text" name="author" style="width: 453px" placeholder="Text less than 20 symbols"></td>
             </tr>
             <tr>
               <td>Название сайта:</td>
-              <td><input type="text" name="title" style="width: 453px"></td>
+              <td><input type="text" name="title" style="width: 453px" placeholder="Text less than 20 symbols"></td>
             </tr>
             <tr>
               <td>URL сайта:</td>
-              <td><input type="text" name="title" style="width: 300px"></td>
+              <td><input type="url" name="siteUrl" placeholder="https://example.com" style="width: 453px"></td>
             </tr>
             <tr>
               <td>Дата запуска сайта:</td>
-              <td><input type="text" name="startdate" style="width: 80px"></td>
+              <td><input type="date" name="startdate" style="width: 180px" min="1999-01-01" max="2022-01-01" required>
+              </td>
             </tr>
             <tr>
               <td>Посетителей в сутки:</td>
-              <td><input type="text" name="persons" style="width: 80px"></td>
+              <td><input type="number" name="persons" style="width: 180px" placeholder="Only number"></td>
             </tr>
             <tr>
               <td>E-mail для связи:</td>
-              <td><input type="email" name="title" style="width: 200px"></td>
+              <td><input type="email" name="email" style="width: 453px" placeholder="example@example.example"></td>
             </tr>
             <tr>
               <td>Рубрика каталога:</td>
               <td style="padding-left: 1px">
-                <select name="rubric" style="width: 204px; margin-left: 2px">
+                <select name="rubric" style="width: 180px; margin-left: 2px">
                   <option value="1">здоровье</option>
                   <option value="2">домашний уют</option>
-                  <option value="3" selected="">бытовая техника</option>
+                  <option value="3" selected>бытовая техника</option>
                 </select>
               </td>
             </tr>
@@ -72,17 +70,18 @@
               <td>Размещение:</td>
               <td style="padding: 2px 0 2px 0">
                 <input type="radio" name="public" value="1"><span class="SRadio8a">бесплатное</span>
-                <input type="radio" name="public" value="2"><span class="SRadio8a">платное</span>
+                <input type="radio" name="public" value="2" checked><span class="SRadio8a">платное</span>
                 <input type="radio" name="public" value="3"><span class="SRadio8a">VIP</span>
               </td>
             </tr>
             <tr>
-              <td style="padding: 2px 0 3px 3px">Разрешить&nbsp;отзывы:</td>
+              <td style="padding: 2px 0 3px 3px">Разрешить отзывы:</td>
               <td><input type="checkbox" name="comments"></td>
             </tr>
             <tr>
               <td colspan="2">Описание сайта:<br>
-                <textarea name="article" style="width: 608px; height: 50px"></textarea>
+                <textarea placeholder="Text more than 20 symbols" name="article"
+                  style="width: 608px; height: 50px"></textarea>
               </td>
             </tr>
             <tr>
