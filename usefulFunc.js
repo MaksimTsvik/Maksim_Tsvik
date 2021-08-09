@@ -1,3 +1,4 @@
+//---------------
 // Хэш (объект) как память (как запомнить что что-то уже случалось)
 var values = [55, 77, 55, 66, 77];
 var used = {}; // ключ хэша - число, которое уже встречалось
@@ -9,6 +10,7 @@ for (var i = 0; i < values.length; i++) {
   console.log(value); // выводим его в консоль
 }
 
+//---------------
 // Хэш (объект) как счётчик
 var animals = ['собака', 'кошка', 'тушкан', 'собака', 'собака', 'тушкан'];
 
@@ -20,16 +22,19 @@ for (var i = 0; i < animals.length; i++) {
   count[animal]++;
 }
 
+//---------------
 // округление до произвольного модуля
 function roundMod(n, m) {
   return Math.round(n / m) * m;
 }
 
+//---------------
 // получение целого случайного числа в заданном диапазоне
 function randomDiap(n, m) {
   return Math.floor(Math.random() * (m - n + 1)) + n;
 }
 
+//---------------
 // Русскоязычное форматирование даты и времени (функция)
 // форматирует переданную дату-время в формате дд.мм.гггг чч:мм:сс
 function formatDateTime(dt) {
@@ -42,6 +47,7 @@ function formatDateTime(dt) {
   return str0l(day, 2) + '.' + str0l(month, 2) + '.' + year + ' ' + str0l(hours, 2) + ':' + str0l(minutes, 2) + ':' + str0l(seconds, 2);
 }
 
+//---------------
 // дополняет строку Val слева нулями до длины Len
 function str0l(val, len) {
   var strVal = val.toString();
@@ -53,6 +59,7 @@ function str0l(val, len) {
 var currTime = new Date();
 console.log(formatDateTime(currTime));
 
+//---------------
 // Русскоязычное форматирование даты и времени (метод)
 // форматирует переданную дату-время в формате дд.мм.гггг чч:мм:сс
 function formatDateTime() {
@@ -65,6 +72,7 @@ function formatDateTime() {
   return str0l(day, 2) + '.' + str0l(month, 2) + '.' + year + ' ' + str0l(hours, 2) + ':' + str0l(minutes, 2) + ':' + str0l(seconds, 2);
 }
 
+//---------------
 // дополняет строку Val слева нулями до длины Len
 function str0l(val, len) {
   var strVal = val.toString();
@@ -82,7 +90,7 @@ var currTime2 = new Date();
 console.log(currTime1.formatRus()); // метод можно вызывать даже для объектов, созданных до описания метода!
 console.log(currTime2.formatRus());
 
-
+//---------------
 // Полезная функция получения координат элемента
 // получение координат элемента относительно верхнего левого угла страницы
 function getElementPos(elem) {
@@ -93,6 +101,7 @@ function getElementPos(elem) {
   };
 }
 
+//---------------
 // то же, кроссбраузерный вариант (в т.ч. для IE8-)
 function getElementPos(elem) {
   var bbox = elem.getBoundingClientRect();
@@ -115,6 +124,7 @@ function getElementPos(elem) {
   };
 }
 
+//---------------
 // получение целевого элемента события
 // EO - объект события
 function getEventElement(EO) {
@@ -126,7 +136,7 @@ function getEventElement(EO) {
 
   return null;
 }
-
+//---------------
 // остановка распространения события
 // EO - объект события
 function stopPropagation(EO) {
@@ -136,6 +146,7 @@ function stopPropagation(EO) {
     EO.cancelBubble = true;
 }
 
+//---------------
 // отмена обработки события по умолчанию
 // EO - объект события
 function preventDefault(EO) {
@@ -145,6 +156,7 @@ function preventDefault(EO) {
     EO.returnValue = false;
 }
 
+//---------------
 // получение нажатой кнопки мыши
 // EO - объект события
 function getMouseWhich(EO) {
@@ -155,6 +167,7 @@ function getMouseWhich(EO) {
   return 0;
 }
 
+//---------------
 // получение нажатого на клавиатуре символа
 // EO - объект события
 function getKeyboardChar(EO) {
@@ -168,3 +181,141 @@ function getKeyboardChar(EO) {
   }
   return null; // управляющая клавиша
 }
+
+//---------------
+//Фильтрация серии событий — дебоунсинг, срабатывание в конце серии
+// функция позволяет установить обработчик func, который не срабатывает слишком часто -
+// если immediate=false - func будет вызван в конце серии событий,
+// если immediate=true - func будет вызван в начале серии событий
+// серия событий - последовательность событий, интервалы между которыми
+// не превыщают interval миллисекунд
+function debounceSerie(func, interval, immediate) {
+  var timer;
+  return function () {
+    var context = this, args = arguments;
+    var later = function () {
+      timer = null;
+      if (!immediate)
+        func.apply(context, args);
+    };
+    var callNow = immediate && !timer;
+    clearTimeout(timer);
+    timer = setTimeout(later, interval);
+    if (callNow)
+      func.apply(context, args);
+  };
+};
+
+//---------------
+//Наращивание координат по таймеру
+var pos1;
+var pos2;
+var timer1;
+var timer2;
+var startTime;
+
+function start() {
+  pos1 = 0;
+  pos2 = 0;
+  startTime = new Date();
+  timer1 = setInterval(tick1, 100);
+  timer2 = setInterval(tick2, 1000);
+}
+
+function tick1() {
+  pos1++;
+  document.getElementById('Frog1').style.left = pos1 + "px";
+  if (pos1 >= 300) {
+    clearInterval(timer1);
+    console.log('красная лягушка: ' + (new Date() - startTime));
+  }
+}
+
+function tick2() {
+  pos2 += 10;
+  document.getElementById('Frog2').style.left = pos2 + "px";
+  if (pos2 >= 300) {
+    clearInterval(timer2);
+    console.log('зелёная лягушка: ' + (new Date() - startTime));
+  }
+}
+
+//---------------
+// Пересчёт координат по таймеру
+var pos1, pos2;
+var timer1, timer2;
+var startTime;
+
+function start() {
+  pos1 = 0;
+  pos2 = 0;
+  startTime = new Date();
+  timer1 = setInterval(tick1, 100);
+  timer2 = setInterval(tick2, 1000);
+}
+
+function tick1() {
+  // скорость - 10 пикселей в секунду
+  var pos1 = Math.round(((new Date) - startTime) / 1000 * 10);
+  document.getElementById('Frog1').style.left = pos1 + "px";
+  if (pos1 >= 300) {
+    clearInterval(timer1);
+    console.log('красная лягушка: ' + (new Date() - startTime));
+  }
+}
+
+function tick2() {
+  // скорость - 10 пикселей в секунду
+  var pos2 = Math.round(((new Date) - startTime) / 1000 * 10);
+  document.getElementById('Frog2').style.left = pos2 + "px";
+  if (pos2 >= 300) {
+    clearInterval(timer2);
+    console.log('зелёная лягушка: ' + (new Date() - startTime));
+  }
+}
+
+//---------------
+// Применение таймера в интерфейсах — решение с таймером
+var translateDelayTimer = 0; // таймера нет
+
+function startTimer() { // (ре)старт таймера
+  stopTimer();
+  translateDelayTimer = setTimeout(translatePhrase, 500);
+}
+
+function stopTimer() { // стоп таймера
+  if (translateDelayTimer) {
+    clearTimeout(translateDelayTimer);
+    translateDelayTimer = 0;
+  }
+}
+
+function keyPressed() {
+  startTimer();
+}
+
+function translatePhrase() {
+  stopTimer(); // важно чтоб очистить translateDelayTimer
+  // запускаем длительную операцию по обработке фразы
+  var phrase = document.getElementById('IPhrase').value;
+  console.log('перевожу фразу: ' + phrase);
+}
+
+//---------------
+//Проверка на поддержку свойств и методов
+function getSelectedText() {
+  var sel = '';
+  if (document.selection)
+    sel = document.selection.createRange().text;
+  else if (window.getSelection)
+    sel = window.getSelection().toString();
+  else if (document.getSelection)
+    sel = document.getSelection();
+  return sel;
+}
+
+//---------------
+// Проверка на поддержку CSS-технологий
+console.log(CSS.supports('display', 'flex'));
+
+//---------------

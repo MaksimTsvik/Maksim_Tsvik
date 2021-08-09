@@ -162,7 +162,7 @@ function articleInsp() {
   }
 }
 
-
+//add warning span
 function addWarning(self) {
   let newElem = document.createElement('span');
   let newElemText = document.createTextNode(' INCORRECT INPUT VALUE')
@@ -170,6 +170,7 @@ function addWarning(self) {
   newElem.style.color = 'red';
   self.after(newElem);
 }
+//remove warning span
 function removeWarning(self) {
   if (self.nextElementSibling) {
     self.nextElementSibling.remove();
@@ -177,7 +178,7 @@ function removeWarning(self) {
 }
 
 formTag.addEventListener('submit', validation);
-
+// validation by submit button
 function validation(e) {
   e = e || window.event;
   // inspection for each field validation
