@@ -1,0 +1,31 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+.h1Header {
+  text-align: center;
+}
+
+.area {
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  background-color: azure;
+  border: 2px black solid;
+  width: 600px;
+  height: 400px;
+}
+
+.box {
+  position: absolute;
+  background-color: brown;
+  border: 2px blue solid;
+  height: 60px;
+  width: 60px;
+  left: 0px;
+  top: 0px;
+}
