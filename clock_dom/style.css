@@ -1,0 +1,23 @@
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+.h1Header {
+  text-align: center;
+  margin-top: 16px;
+}
+hr {
+  margin: 10;
+}
+.clock {
+  margin: 0 auto;
+  }
+.clock_circle {
+  margin: 0 auto;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background-color: rgb(199, 188, 41);
+}
