@@ -13,11 +13,17 @@ hr {
 }
 .clock {
   margin: 0 auto;
+  position: relative;
+  height: 510px;
   }
 .clock_circle {
   margin: 0 auto;
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background-color: rgb(199, 188, 41);
+  background-color: rgba(104, 141, 198, 1);
+  position: absolute;
+  top: 50%;  /* position the top  edge of the element at the middle of the parent */
+  left: 50%; /* position the left edge of the element at the middle of the parent */
+  transform: translate(-50%, -50%);
 }
