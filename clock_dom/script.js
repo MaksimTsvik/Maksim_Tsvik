@@ -48,3 +48,22 @@ hourArrow.style.cssText = `position: absolute; width: ${radius - 2.5 * numberSiz
 clock.append(secArrow);
 clock.append(minArrow);
 clock.append(hourArrow);
+
+//setup a timer to obtain actual date
+const timer = setInterval(setDate, 1000);
+
+function setDate() {
+  const date = new Date();
+  const seconds = date.getSeconds();
+  const minutes = date.getMinutes();
+  const hours = date.getHours();
+  const secTransform = seconds * 6 - 90;
+  const minutesTransform = minutes * 6 - 90;
+  const hoursTransform = hours * 30 - 90;
+  secArrow.style.transform = `rotate(${secTransform}deg)`;
+  minArrow.style.transform = `rotate(${minutesTransform}deg)`;
+  hourArrow.style.transform = `rotate(${hoursTransform}deg)`;
+
+  
+
+}
