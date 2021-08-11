@@ -1,10 +1,12 @@
+const size = 500; //setup main clock size in px 
+const radius = size / 2 - size / 10; //setup radius where all numbers located
+const numberSize = size / 10; //setup size of a numbers of clock in px
+let angleStep = 30; //setup step between numbers in degrees
+
 //get clock container
 const clock = document.querySelector('.clock')
-
-const radius = 200; //setup radius where all numbers located
-let angleStep = 30; //setup step between numbers in degrees
-const numberSize = 40; //setup size of a numbers of clock in px
-const size = 500; //setup main clock size in px
+clock.style.height = size + 10 + 'px'; //update clocks container size
+clock.style.position = 'relative'; //setup relative container for clock
 
 // create clock circle
 const clockCircle = document.createElement('div');
@@ -12,7 +14,7 @@ clockCircle.style.cssText = `
 width: ${size}px;
 height: ${size}px;
 border-radius: 50%;
-background-color: rgba(104, 141, 198, 1);
+background: rgba(104, 141, 198, 1);
 position: absolute;
 top: 50%;
 left: 50%; 
@@ -23,7 +25,6 @@ clock.append(clockCircle);
 //find x and y coordinates of clock's center
 const clockCircleX = clockCircle.offsetLeft;
 const clockCircleY = clockCircle.offsetTop;
-console.log(clockCircle.offsetWidth)
 
 //add time scale at clock
 for (let i = 1; i < 13; i++) {
@@ -74,7 +75,7 @@ digitalClock.style.cssText = `position: absolute; text-align:center;
   left: ${clockCircleX}px;
   top: ${clockCircleY}px;
   line-height: ${numberSize}px;
-  transform: translate(-50%, -${3 * numberSize}px);
+  transform: translate(-50%, -${2 * numberSize}px);
   font-size: ${numberSize}px`;
 
 //setup a timer to obtain actual date
