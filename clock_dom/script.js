@@ -6,8 +6,7 @@ let angleStep = 30; //setup step between numbers in degrees
 //get clock container
 const clock = document.querySelector('.clock')
 clock.style.height = size + 10 + 'px'; //update clocks container size
-clock.style.width = size + 'px';
-clock.style.position = 'relative'; //setup relative container for clock
+clock.style.width = size + 'px'; //update clocks container size
 
 // create clock circle
 const clockCircle = document.createElement('div');
