@@ -81,4 +81,4 @@ function startMove() {
 }
 
 //add timer for continious move
-let timer = setInterval(startMove, 10);
+let timer = setInterval(startMove, 5);
