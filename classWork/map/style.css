@@ -9,3 +9,35 @@ html {
 .h1Header {
   text-align: center;
 }
+
+.area {
+  margin: 0 auto;
+  width: 60vw;
+  height: 60vh;
+  background-color: bisque;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
+
+}
+
+.grass {
+  background: url(./grass.jpg) no-repeat center;
+  background-size: cover;
+  width: 10vw;
+  height: 10vh;
+}
+.asphalt {
+  background: url(./asphalt.jpg) no-repeat center;
+  background-size: cover;
+  width: 10vw;
+  height: 10vh;
+}
+.wall {
+  background: url(./wall.gif) no-repeat center;
+  background-size: cover;
+  width: 10vw;
+  height: 10vh;
+}
+
+
