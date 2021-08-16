@@ -319,3 +319,20 @@ function getSelectedText() {
 console.log(CSS.supports('display', 'flex'));
 
 //---------------
+//Равномерное движение с requestAnimationFrame кроссбраузерно
+var RAF =
+  // находим, какой метод доступен
+  window.requestAnimationFrame ||
+  window.webkitRequestAnimationFrame ||
+  window.mozRequestAnimationFrame ||
+  window.oRequestAnimationFrame ||
+  window.msRequestAnimationFrame ||
+  // ни один не доступен
+  // будем работать просто по таймеру
+  function (callback) { window.setTimeout(callback, 1000 / 60); }
+  ;
+function start() {
+  // синхрон с внутренней анимацией браузера
+  // обычно 60 раз в сек
+  RAF(tick);
+}

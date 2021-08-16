@@ -129,3 +129,5 @@ function str0l(val, len) {
     strVal = '0' + strVal;
   return strVal;
 }
+
+setDate();
