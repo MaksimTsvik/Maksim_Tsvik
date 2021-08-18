@@ -42,7 +42,7 @@ for (let i = 1; i < 13; i++) {
   timeNumber.innerHTML = `${i}`;
   timeNumber.setAttribute('text-anchor', 'middle');
   timeNumber.setAttribute('x', `${numberCenterX}`);
-  timeNumber.setAttribute('y', `${numberCenterY + numberSize / 4}`);
+  timeNumber.setAttribute('y', `${numberCenterY + numberSize / 4 -2}`);
   timeNumber.style.fontSize = numberSize / 1.5 + 'px';
 
   // add numbers BG
@@ -96,7 +96,7 @@ const digitalClock = document.createElementNS("http://www.w3.org/2000/svg", 'tex
 digitalClock.setAttribute('text-anchor', 'middle');
 digitalClock.setAttribute('x', `${clockCircleX}`);
 digitalClock.setAttribute('y', `${clockCircleY - numberSize * 1.5}`);
-digitalClock.style.fontSize = numberSize / 1.5 + 'px';
+digitalClock.style.fontSize = numberSize + 'px';
 
 svgClock.append(digitalClock);
 
