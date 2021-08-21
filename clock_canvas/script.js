@@ -16,6 +16,8 @@ canvasClock.width = size;
 //canvas re-draw function
 function draw() {
   const ctx = canvasClock.getContext('2d'); //get canvas img
+  ctx.save();
+  ctx.clearRect(0, 0, size, size);
 
   // create clock circle
   ctx.fillStyle = 'rgba(104, 141, 198, 1)';
@@ -29,6 +31,8 @@ function draw() {
 
   // add time scale at clock
   for (let i = 1; i < 13; i++) {
+    ctx.save();
+
     //turn angle calc
     let angle = parseFloat(angleStep) / 180 * Math.PI;
     //calculation of a new div's coordinates
@@ -45,111 +49,69 @@ function draw() {
     ctx.textBaseline = 'middle';
     ctx.fillText(i, numberCenterX, numberCenterY);
 
+    ctx.restore();
+
     angleStep = angleStep + 30;
   }
 
+  //Draw arrows based on time
+  const now = new Date();
+  const sec = now.getSeconds();
+  const min = now.getMinutes();
+  let hr = now.getHours();
+  hr = hr >= 12 ? hr - 12 : hr;
+  secAngle = sec * Math.PI / 30;
+  minAngle = (Math.PI / 30) * min + (Math.PI / 1800) * sec;
+  hrAngle = hr * (Math.PI / 6) + (Math.PI / 360) * min + (Math.PI / 21600) * sec;
+
+  //create an arrows
+  drawArrow(ctx, "red", clockCircleY - 2 * numberSize, 6, secAngle);
+  drawArrow(ctx, "black", clockCircleY - 3 * numberSize, 8, minAngle);
+  drawArrow(ctx, "black", clockCircleY - 3.5 * numberSize, 10, hrAngle);
+
+  //create a text time representation
+  ctx.save();
+  ctx.fillStyle = 'black';
+  ctx.font = `normal ${numberSize}px Times New Roman`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(formatDateTime(now), clockCircleX, clockCircleY - numberSize * 2);
+  ctx.restore();
+
+  ctx.restore();
+
+  requestAnimationFrame(draw);
 }
 
+function drawArrow(context, color, length, width, angle) {
+  context.save();
+  context.lineWidth = width;
+  context.translate(size / 2, size / 2);
+  context.rotate(angle);
+  context.strokeStyle = color;
+  context.globalAlpha = 0.7;
+  context.beginPath();
+  context.moveTo(0, 0);
+  context.lineTo(0, -length);
+  context.stroke();
+  context.closePath();
+  context.restore();
+}
 
-draw();
+requestAnimationFrame(draw);
 
+// date formatter function (чч:мм:сс)
+function formatDateTime(dt) {
+  let hours = dt.getHours();
+  let minutes = dt.getMinutes();
+  let seconds = dt.getSeconds();
+  return str0l(hours, 2) + ':' + str0l(minutes, 2) + ':' + str0l(seconds, 2);
+}
 
-// 
-
-// //create an arrows
-// const secArrow = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-// const minArrow = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-// const hourArrow = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-
-// secArrow.setAttribute('x1', clockCircleX);
-// secArrow.setAttribute('y1', clockCircleY);
-// secArrow.setAttribute('x2', clockCircleX);
-// secArrow.setAttribute('y2', `${clockCircleY - radius + numberSize}`);
-// secArrow.setAttribute('stroke', 'red');
-// secArrow.setAttribute('stroke-width', '6');
-// secArrow.style.cssText = "transition: all 0.1s cubic-bezier(0.37, 3.18, 0.45, 1.15); opacity: 70%; transform-origin: 50% 50%";
-
-// minArrow.setAttribute('x1', clockCircleX);
-// minArrow.setAttribute('y1', clockCircleY);
-// minArrow.setAttribute('x2', clockCircleX);
-// minArrow.setAttribute('y2', `${clockCircleY - (radius - 1.5 * numberSize)}`);
-// minArrow.setAttribute('stroke', 'black');
-// minArrow.setAttribute('stroke-width', '8');
-// minArrow.style.cssText = "transition: all 0.1s cubic-bezier(0.37, 3.18, 0.45, 1.15); opacity: 70%; transform-origin: 50% 50%";
-
-// hourArrow.setAttribute('x1', clockCircleX);
-// hourArrow.setAttribute('y1', clockCircleY);
-// hourArrow.setAttribute('x2', clockCircleX);
-// hourArrow.setAttribute('y2', `${clockCircleY - (radius - 2.5 * numberSize)}`);
-// hourArrow.setAttribute('stroke', 'black');
-// hourArrow.setAttribute('stroke-width', '10');
-// hourArrow.style.cssText = "transition: all 0.1s cubic-bezier(0.37, 3.18, 0.45, 1.15); opacity: 70%; transform-origin: 50% 50%";
-
-// svgClock.append(secArrow);
-// svgClock.append(minArrow);
-// svgClock.append(hourArrow);
-
-// //create a text time representation
-// const digitalClock = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-
-// digitalClock.setAttribute('text-anchor', 'middle');
-// digitalClock.setAttribute('x', `${clockCircleX}`);
-// digitalClock.setAttribute('y', `${clockCircleY - numberSize * 1.5}`);
-// digitalClock.style.fontSize = numberSize + 'px';
-
-// svgClock.append(digitalClock);
-
-// //setup a timer to obtain actual date
-// const timer = setInterval(setDate, 1000);
-// //use timer function to move arrows and update time
-// function setDate() {
-//   const date = new Date();
-//   const seconds = date.getSeconds();
-//   const minutes = date.getMinutes();
-//   const hours = date.getHours();
-//   //calculate arrows turn angle
-//   const secTransform = seconds * 6;
-//   const minutesTransform = minutes * 6;
-//   const hoursTransform = hours * 30;
-//   //move an arrows
-//   secArrow.style.transform = `rotate(${secTransform}deg)`;
-//   minArrow.style.transform = `rotate(${minutesTransform}deg)`;
-//   hourArrow.style.transform = `rotate(${hoursTransform}deg)`;
-//   //remove threshold at 12(24)/0 point
-//   if (seconds == 0) {
-//     secArrow.style.transition = 'none';
-//   } else {
-//     secArrow.style.transition = 'all 0.1s cubic-bezier(0.37, 3.18, 0.45, 1.15)';
-//   }
-//   if (minutes == 0) {
-//     minArrow.style.transition = 'none';
-//   } else {
-//     minArrow.style.transition = 'all 0.1s cubic-bezier(0.37, 3.18, 0.45, 1.15)';
-//   }
-//   if (hours == 12 || hours == 24) {
-//     hourArrow.style.transition = 'none';
-//   } else {
-//     hourArrow.style.transition = 'all 0.1s cubic-bezier(0.37, 3.18, 0.45, 1.15)';
-//   }
-//   //update digital clock data
-//   digitalClock.innerHTML = `${formatDateTime(date)}`;
-// }
-
-// // date formatter function (чч:мм:сс)
-// function formatDateTime(dt) {
-//   let hours = dt.getHours();
-//   let minutes = dt.getMinutes();
-//   let seconds = dt.getSeconds();
-//   return str0l(hours, 2) + ':' + str0l(minutes, 2) + ':' + str0l(seconds, 2);
-// }
-
-// // add 0 to val in dependance of Len
-// function str0l(val, len) {
-//   let strVal = val.toString();
-//   while (strVal.length < len)
-//     strVal = '0' + strVal;
-//   return strVal;
-// }
-
-// setDate();
-
+// add 0 to val in dependance of Len
+function str0l(val, len) {
+  let strVal = val.toString();
+  while (strVal.length < len)
+    strVal = '0' + strVal;
+  return strVal;
+}
