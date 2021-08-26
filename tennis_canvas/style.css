@@ -1,0 +1,25 @@
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+.h1Header {
+  text-align: center;
+  margin-top: 16px;
+}
+hr {
+  margin: 10px;
+}
+.tennis{
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+.start-btn, .stop-btn {
+  width: 70px;
+  margin: 20px;
+  padding: 5px;
+  background-color: black;
+  color: azure;
+}
