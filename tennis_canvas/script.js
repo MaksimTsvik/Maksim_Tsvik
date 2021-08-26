@@ -4,6 +4,9 @@ const racketWidth = racketHeight / 5;
 
 let leftScore = 0; //setup score
 let rightScore = 0;
+//get score
+const score = document.querySelector('.score');
+score.innerHTML = `LEFT ${leftScore} : ${rightScore} RIGHT`
 
 //get tennis container
 const tennis = document.querySelector('.tennis')
@@ -124,6 +127,7 @@ function startPlay() {
     } else if (ball.x < 0) {
       stopPlay();
       rightScore++;
+      score.innerHTML = `${leftScore} : ${rightScore}`
       return;
     }
   }
@@ -134,6 +138,7 @@ function startPlay() {
     } else if (ball.x > racketRight.x + racketWidth) {
       stopPlay();
       leftScore++;
+      score.innerHTML = `${leftScore} : ${rightScore}`
       return;
     }
   }

@@ -23,3 +23,7 @@ hr {
   background-color: black;
   color: azure;
 }
+.score {
+  margin: 20px;
+  padding: 5px;
+}
