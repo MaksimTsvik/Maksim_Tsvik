@@ -2,6 +2,10 @@ const size = 500; //setup tennis deck height
 const racketHeight = size / 4;
 const racketWidth = racketHeight / 6;
 
+//add hit sound
+const hit = new Audio();
+hit.src = './hit.wav';
+
 let leftScore = 0; //setup score
 let rightScore = 0;
 //get score
@@ -78,8 +82,12 @@ function drawRacket(racket) {
   ctx.fillRect(racket.x, racket.y, racketWidth, racketHeight);
   ctx.restore();
 }
-drawRacket(racketLeft);
-drawRacket(racketRight);
+
+//draw rackets only if audio uploaded
+hit.onloadstart = () => {
+  drawRacket(racketLeft);
+  drawRacket(racketRight);
+}
 
 startBtn.addEventListener('click', startPlay); //start game mvmnt
 stopBtn.addEventListener('click', stopPlay); //stop and re-draw canvas into initial state;
@@ -124,6 +132,7 @@ function startPlay() {
     if (hitRacketLeft) {
       ball.vx = -ball.vx * 1.2;
       ball.vy = ball.vy * 1.2;
+      hit.play();
     } else if (ball.x < 0) {
       stopPlay();
       rightScore++;
@@ -135,6 +144,7 @@ function startPlay() {
     if (hitRacketRight) {
       ball.vx = -ball.vx * 1.2;
       ball.vy = ball.vy * 1.2;
+      hit.play();
     } else if (ball.x > racketRight.x + racketWidth) {
       stopPlay();
       leftScore++;

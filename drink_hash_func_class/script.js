@@ -45,15 +45,28 @@ deleteBtn.addEventListener("click", deleteDrink);
 listBtn.addEventListener("click", listDrink);
 
 function addDrink() {
+  //add drinks from local storage
+  const storage = JSON.parse(localStorage.drinks);
+  for (let key in storage) {
+    drinkStorage.addValue(key, storage[key]);
+  }
+
   const name = prompt('Input drink NAME', "Type HERE");
   const alcohol = confirm("Is it with alcohol?") ? "YES" : "NO";
   const reciepe = prompt("Input a receipe", "Type HERE");
   //Adding new drink
   drinkStorage.addValue(name, { "Is it with alcohol": alcohol, "How to mix it": reciepe });
-  console.log(drinkStorage)
+
+  localStorage.drinks = JSON.stringify(drinkStorage);
 }
 
 function getDrink() {
+  //add drinks from local storage
+  const storage = JSON.parse(localStorage.drinks);
+  for (let key in storage) {
+    drinkStorage.addValue(key, storage[key]);
+  }
+
   const name = prompt('Input drink NAME', "Type HERE");
 
   if (!(name in drinkStorage)) {
@@ -67,12 +80,23 @@ How to mix it: ${drinkProp["How to mix it"]}`)
 }
 
 function deleteDrink() {
+  //add drinks from local storage
+  const storage = JSON.parse(localStorage.drinks);
+  for (let key in storage) {
+    drinkStorage.addValue(key, storage[key]);
+  }
   const name = prompt('Input drink NAME', "Type HERE");
   if (drinkStorage.deleteValue(name)) alert("DELETED");
   else alert("NO SUCH DRINK!");
-  console.log(drinkStorage);
+  //update local storage
+  localStorage.drinks = JSON.stringify(drinkStorage);
 }
 
 function listDrink() {
+  //add drinks from local storage
+  const storage = JSON.parse(localStorage.drinks);
+  for (let key in storage) {
+    drinkStorage.addValue(key, storage[key]);
+  }
   alert(`${drinkStorage.getKeys()}`);
 }
