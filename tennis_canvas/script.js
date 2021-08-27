@@ -1,6 +1,6 @@
 const size = 500; //setup tennis deck height
-const racketHeight = size / 5;
-const racketWidth = racketHeight / 5;
+const racketHeight = size / 4;
+const racketWidth = racketHeight / 6;
 
 let leftScore = 0; //setup score
 let rightScore = 0;
@@ -89,16 +89,16 @@ function moveRacket(e) {
   e = e || window.event;
   switch (e.keyCode) {
     case 87:
-      racketLeft.y -= racketWidth;
+      racketLeft.y -= racketWidth * 1.5;
       break;
     case 83:
-      racketLeft.y += racketWidth;
+      racketLeft.y += racketWidth * 1.5;
       break;
     case 38:
-      racketRight.y -= racketWidth;
+      racketRight.y -= racketWidth * 1.5;
       break;
     case 40:
-      racketRight.y += racketWidth;
+      racketRight.y += racketWidth * 1.5;
       break;
   }
 }
