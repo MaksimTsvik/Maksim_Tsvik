@@ -99,4 +99,5 @@ function listDrink() {
     drinkStorage.addValue(key, storage[key]);
   }
   alert(`${drinkStorage.getKeys()}`);
+  // localStorage.clear();
 }
