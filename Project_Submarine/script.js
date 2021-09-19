@@ -63,6 +63,7 @@ function switchToMainPage() {
 
 function switchToGamePage() {
   switchToState({ pagename: 'Game' });
+  location.reload();
 }
 
 // переключаемся в состояние, которое сейчас прописано в закладке УРЛ
