@@ -32,7 +32,7 @@ function switchToStateFromURLHash() {
         Sorry! Update your browser first!
         </canvas>
         <input type="button" class="back" value="BACK" onclick="switchToMainPage()">
-        `
+        `;
       break;
   }
   document.querySelector('.wrapper').innerHTML = pageHTML;
@@ -53,6 +53,7 @@ function switchToState(newState) {
 
 function switchToMainPage() {
   switchToState({ pagename: 'Main' });
+  location.reload();
 }
 
 function switchToGamePage() {

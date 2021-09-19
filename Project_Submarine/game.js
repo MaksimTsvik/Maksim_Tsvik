@@ -1,7 +1,7 @@
-window.addEventListener("load", function () {
-    const loader = document.querySelector(".loader");
-    loader.className += " hidden"; // class "loader hidden"
-});
+// window.addEventListener("load", function () {
+//     const loader = document.querySelector(".loader");
+//     loader.className += " hidden"; // class "loader hidden"
+// });
 
 // SELECT CVS
 const cvs = document.getElementById("submarine");
@@ -19,7 +19,7 @@ sprite.src = "img/subSprite2.png";
 const MUSIC = new Audio();
 MUSIC.src = "audio/subgame.mp3"
 MUSIC.loop = true;
-MUSIC.volume = 0.2;
+MUSIC.volume = 0.4;
 
 ACT = new Audio();
 ACT.src = "audio/rememberWinter.ogg"
@@ -31,7 +31,7 @@ SCORE_S.src = "audio/coin.wav";
 
 const SWIM = new Audio();
 SWIM.src = "audio/bubbles.mp3";
-SWIM.volume = 0.3;
+SWIM.volume = 0.2;
 
 const HIT = new Audio();
 HIT.src = "audio/atari_boom6.wav";
@@ -59,7 +59,9 @@ const startBtn = {
 }
 
 // CONTROL THE GAME
-cvs.addEventListener("click", function (e) {
+cvs.addEventListener("click", action);
+cvs.addEventListener("touch", action);
+function action(e) {
     switch (state.current) {
         case state.getReady:
             state.current = state.game;
@@ -84,7 +86,7 @@ cvs.addEventListener("click", function (e) {
             }
             break;
     }
-});
+}
 
 
 // BACKGROUND
