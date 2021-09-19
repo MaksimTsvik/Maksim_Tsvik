@@ -1,8 +1,3 @@
-
-window.addEventListener("load", function () {
-  const loader = document.querySelector(".loader");
-  loader.className += " hidden"; // class "loader hidden"
-});
 window.onhashchange = switchToStateFromURLHash;
 
 // текущее состояние приложения
@@ -41,7 +36,6 @@ function switchToStateFromURLHash() {
       break;
   }
   document.querySelector('.wrapper').innerHTML = pageHTML;
-
 }
 
 // устанавливает в закладке УРЛа новое состояние приложения
