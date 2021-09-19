@@ -13,13 +13,19 @@
 </head>
 
 <body>
+    <iframe src="https://olafwempe.com/mp3/silence/silence.mp3" type="audio/mp3" allow="autoplay"></iframe>
+    <div class="loader">
+        <img src="./img/load.gif" alt="Loading..." />
+    </div>
     <div class="wrapper">
-        <canvas id="submarine" width="320" height="480">
+        <input type="button" class="start" value="START" onclick="switchToGamePage()">
+        <!-- <canvas id="submarine" width="320" height="480">
             Sorry! Update your browser first!
-        </canvas>
+        </canvas> -->
     </div>
 
-    <script src="game.js"></script>
+    <script src="./script.js"></script>;
+    <script src="./game.js"></script>
 </body>
 
 </html>

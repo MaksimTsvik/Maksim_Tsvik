@@ -1,3 +1,4 @@
+
 // SELECT CVS
 const cvs = document.getElementById("submarine");
 const ctx = cvs.getContext("2d");
@@ -44,15 +45,6 @@ const state = {
     game: 1,
     over: 2
 }
-switch (state.current) {
-    case 0:
-        MUSIC.play();
-        break;
-    case 1:
-        ACT.play();
-        break;
-}
-
 
 // START BUTTON COORD
 const startBtn = {
@@ -357,7 +349,7 @@ const score = {
                 ctx.save();
                 ctx.fillStyle = 'gold';
                 ctx.beginPath();
-                ctx.arc(gameOver.cX+47, gameOver.cY+gameOver.cH/2+7, 20, 0, 360, false)
+                ctx.arc(gameOver.cX + 47, gameOver.cY + gameOver.cH / 2 + 7, 20, 0, 360, false)
                 ctx.fill();
                 ctx.restore();
             }
