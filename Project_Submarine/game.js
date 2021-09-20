@@ -50,7 +50,7 @@ const state = {
     over: 2
 }
 
-// START BUTTON COORD
+// START BUTTON COORD - at the moment it is a constrain
 const startBtn = {
     x: 120,
     y: 263,
@@ -73,13 +73,14 @@ function action(e) {
             SWIM.play();
             break;
         case state.over:
+            //get coord of a click
             let rect = cvs.getBoundingClientRect();
             let clickX = e.clientX - rect.left;
             let clickY = e.clientY - rect.top;
 
-            // CHECK IF WE CLICK ON THE START BUTTON
+            // start button click inspection
             if (clickX >= startBtn.x && clickX <= startBtn.x + startBtn.w && clickY >= startBtn.y && clickY <= startBtn.y + startBtn.h) {
-                pipes.reset();
+                pMines.reset();
                 submarine.speedReset();
                 score.reset();
                 state.current = state.getReady;
@@ -88,7 +89,13 @@ function action(e) {
     }
 }
 
-
+// Create each drawing figure as an object with:
+//sX - source img X coord from sprite
+//sY - source img Y coord from sprite
+// sW, sH -source img dimensions from sprite
+// cX, cY -canvas destination coords
+//cW, cH -canvas dimensions
+// draw - method to draw that figure
 // BACKGROUND
 const bg = {
     sX: 0,
@@ -115,16 +122,15 @@ const floor = {
     cY: cvs.height - 112,
     cW: cvs.width,
     cH: 112,
-
+    // add dx - 2px img move
     dx: 2,
 
     draw: function () {
         ctx.drawImage(sprite, this.sX, this.sY, this.sW, this.sH, this.cX, this.cY, this.cW, this.cH);
-
+        // add 2nd same size img to emulate mvmnt
         ctx.drawImage(sprite, this.sX, this.sY, this.sW, this.sH, this.cX + this.cW, this.cY, this.cW, this.cH);
-
     },
-
+    // update coords in game state
     update: function () {
         if (state.current == state.game) {
             this.cX = (this.cX - this.dx) % (this.cW);
@@ -134,6 +140,7 @@ const floor = {
 
 // submarine
 const submarine = {
+    //add animation property - where located frames
     animation: [
         { sX: 731, sY: 264 },
         { sX: 731, sY: 424 },
@@ -146,11 +153,11 @@ const submarine = {
     cY: 150,
     cW: 34,
     cH: 34,
-
+    //set up radius - dimensins for collision
     radius: 12,
-
+    //frame of animation storage
     frame: 0,
-
+    //add vars of draw
     gravity: 0.1,
     jump: 2,
     speed: 0,
@@ -166,26 +173,27 @@ const submarine = {
 
         ctx.restore();
     },
-
+    // add movement function
     goUp: function () {
         this.speed = - this.jump;
     },
 
     update: function () {
-        // IF THE GAME STATE IS GET READY STATE, THE submarine MUST goUp SLOWLY
+        // lower frames speed in get ready state
         this.period = state.current == state.getReady ? 10 : 5;
-        // WE INCREMENT THE FRAME BY 1, EACH PERIOD
+        // frame calculation
         this.frame += frames % this.period == 0 ? 1 : 0;
-        // FRAME GOES FROM 0 To 4, THEN AGAIN TO 0
+        // frame on dependance of frames qty
         this.frame = this.frame % this.animation.length;
 
         if (state.current == state.getReady) {
-            this.cY = 150; // RESET POSITION OF THE submarine AFTER GAME OVER
+            this.cY = 150; // reset the position
             this.rotation = 0 * DEGREE;
         } else {
+            //update location
             this.speed += this.gravity;
             this.cY += this.speed;
-
+            //floor hit inspection
             if (this.cY + this.cH / 2 >= cvs.height - floor.cH) {
                 this.cY = cvs.height - floor.cH - this.cH / 2;
                 if (state.current == state.game) {
@@ -194,7 +202,7 @@ const submarine = {
                 }
             }
 
-            // IF THE SPEED IS GREATER THAN THE JUMP MEANS THE submarine IS FALLING DOWN
+            // change rotation in case of speed value
             if (this.speed >= this.jump) {
                 this.rotation = 90 * DEGREE;
                 this.frame = 1;
@@ -204,12 +212,13 @@ const submarine = {
         }
 
     },
+    //new game speed =0
     speedReset: function () {
         this.speed = 0;
     }
 }
 
-// GET READY MESSAGE
+// get ready msg obj
 const getReady = {
     sX: 0,
     sY: 1330,
@@ -228,7 +237,7 @@ const getReady = {
 
 }
 
-// GAME OVER MESSAGE
+// game over msg obj
 const gameOver = {
     sX: 175,
     sY: 1330,
@@ -246,8 +255,8 @@ const gameOver = {
     }
 }
 
-// PIPES
-const pipes = {
+// pMines - obstacles , equal to pipes in flappy bird
+const pMines = {
     position: [],
 
     top: {
@@ -269,15 +278,13 @@ const pipes = {
     dx: 2,
 
     draw: function () {
+        //draw each pMine
         for (let i = 0; i < this.position.length; i++) {
             let p = this.position[i];
-
             let topYPos = p.cY;
             let bottomYPos = p.cY + this.cH + this.gap;
-
             // top pipe
             ctx.drawImage(sprite, this.top.sX, this.top.sY, this.sW, this.sH, p.cX, topYPos, this.cW, this.cH);
-
             // bottom pipe
             ctx.drawImage(sprite, this.bottom.sX, this.bottom.sY, this.sW, this.sH, p.cX, bottomYPos, this.cW, this.cH);
         }
@@ -285,50 +292,52 @@ const pipes = {
 
     update: function () {
         if (state.current !== state.game) return;
-
+        //create obstacle 
         if (frames % 100 == 0) {
             this.position.push({
+                //each pMine is out from canvas
                 cX: cvs.width,
+                //randomizer for Y pos of top pMine
                 cY: this.maxYPos * (Math.random() + 1)
             });
         }
         for (let i = 0; i < this.position.length; i++) {
             let p = this.position[i];
-
             let bottomPipeYPos = p.cY + this.cH + this.gap;
 
-            // COLLISION DETECTION
-            // TOP PIPE
+            // collision detection
+            // top
             if (submarine.cX + submarine.radius > p.cX && submarine.cX - submarine.radius < p.cX + this.cW && submarine.cY + submarine.radius > p.cY && submarine.cY - submarine.radius < p.cY + this.cH) {
                 state.current = state.over;
                 HIT.play();
             }
-            // BOTTOM PIPE
+            // bottom
             if (submarine.cX + submarine.radius > p.cX && submarine.cX - submarine.radius < p.cX + this.cW && submarine.cY + submarine.radius > bottomPipeYPos && submarine.cY - submarine.radius < bottomPipeYPos + this.cH) {
                 state.current = state.over;
                 HIT.play();
             }
 
-            // MOVE THE PIPES TO THE LEFT
+            // move pMine to the left each frame
             p.cX -= this.dx;
 
-            // if the pipes go beyond canvas, we delete them from the array
+            // if the pMines go beyond canvas, we delete them from the array
             if (p.cX + this.cW <= 0) {
                 this.position.shift();
                 score.value += 1;
                 SCORE_S.play();
+                //score update in local storage
                 score.best = Math.max(score.value, score.best);
                 localStorage.setItem("best", score.best);
             }
         }
     },
-
+    //reset pMines ech start
     reset: function () {
         this.position = [];
     }
 }
 
-// SCORE
+// score
 const score = {
     best: parseInt(localStorage.getItem("best")) || 0,
     value: 0,
@@ -344,13 +353,14 @@ const score = {
             ctx.strokeText(this.value, cvs.width / 2, 50);
 
         } else if (state.current == state.over) {
-            // SCORE VALUE
+            // current value
             ctx.font = "25px Teko";
             ctx.fillText(this.value, 225, 186);
             ctx.strokeText(this.value, 225, 186);
-            // BEST SCORE
+            // best
             ctx.fillText(this.best, 225, 228);
             ctx.strokeText(this.best, 225, 228);
+            //draw medal
             if (this.value > this.best) {
                 ctx.save();
                 ctx.fillStyle = 'gold';
@@ -367,13 +377,13 @@ const score = {
     }
 }
 
-// DRAW
+// main draw function
 function draw() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, cvs.width, cvs.height);
 
     bg.draw();
-    pipes.draw();
+    pMines.draw();
     floor.draw();
     submarine.draw();
     getReady.draw();
@@ -381,14 +391,14 @@ function draw() {
     score.draw();
 }
 
-// UPDATE
+// update positions function
 function update() {
     submarine.update();
     floor.update();
-    pipes.update();
+    pMines.update();
 }
 
-// LOOP
+// main loop
 function loop() {
     update();
     draw();
