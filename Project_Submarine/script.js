@@ -1,5 +1,11 @@
 window.onhashchange = switchToStateFromURLHash;
 
+const BGMUSIC = new Audio();
+BGMUSIC.src = "audio/subgame.mp3"
+BGMUSIC.loop = true;
+BGMUSIC.volume = 0.4;
+BGMUSIC.play();
+
 // текущее состояние приложения
 // это Model из MVC
 
@@ -25,6 +31,7 @@ function switchToStateFromURLHash() {
   switch (SPAState.pagename) {
     case 'Main':
       pageHTML += `<input type="button" class="start" value="START" onclick="switchToGamePage()">`;
+      BGMUSIC.play();
       break;
     case 'Game':
       pageHTML += `
@@ -33,6 +40,7 @@ function switchToStateFromURLHash() {
         </canvas>
         <input type="button" class="back" value="BACK" onclick="switchToMainPage()">
         `;
+      BGMUSIC.pause();
       break;
   }
   document.querySelector('.wrapper').innerHTML = pageHTML;
