@@ -1,7 +1,7 @@
 window.onhashchange = switchToStateFromURLHash;
 
 const BGMUSIC = new Audio();
-BGMUSIC.src = "audio/subgame.mp3"
+BGMUSIC.src = "audio/submarine.mp3"
 BGMUSIC.loop = true;
 BGMUSIC.volume = 0.4;
 BGMUSIC.play();
